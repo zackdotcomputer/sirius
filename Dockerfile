@@ -2,11 +2,12 @@ FROM python:3.7.4-slim-buster
 
 WORKDIR /sirius
 
-RUN apt-get update -y && \
-  mkdir -p /usr/share/man/man1 && \
-  mkdir -p /usr/share/man/man7 && \
-  apt-get install -y --no-install-recommends \
-  python3 \
+RUN mkdir -p /usr/share/man/man1 && \
+  mkdir -p /usr/share/man/man7
+
+RUN apt-get update -y
+
+RUN apt-get install -y --no-install-recommends \
   python3-dev \
   python3-pip \
   libfreetype6-dev \
@@ -17,17 +18,15 @@ RUN apt-get update -y && \
   bzip2 \
   fontconfig \
   gcc \
-  phantomjs \
   wget \
-  postgresql-11 \
   git
 
 RUN apt-get autoremove -y
 
-RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
-RUN tar jxf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-  rm phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-  mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+# RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2
+# RUN tar jxf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+#   rm phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
+#   mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
 
 RUN pip install --upgrade pip
 
